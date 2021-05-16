@@ -1,0 +1,6 @@
+databases:
+  northwind_1:
+    url: <%= ENV["NW_1_DATABASE_URL"] %>
+  northwind_2:
+    url: <%= ENV["NW_2_DATABASE_URL"] %>
+

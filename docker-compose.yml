@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  pghero:
+    build:
+      context: .
+      dockerfile: pghero/Dockerfile
+    environment:
+      - NW_1_DATABASE_URL=postgres://pguser:password@postgres:5432/northwind_1
+      - NW_2_DATABASE_URL=postgres://pguser:password@postgres:5432/northwind_2
+    ports:
+      - "8080:8080"
+
+  postgres:
+    image: postgres:13.1-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=pguser
+    ports:
+      - "15432:5432"
+    volumes:
+      - .db/:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  sample_container:
+    build:
+      context: .
+      dockerfile: sample_sql_files/Dockerfile
+    environment:
+      - DATABASE_PASSWORD=password
+      - DATABASE_USERNAME=pguser
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=northwind
+    volumes:
+      - ./sample_sql_files:/opt/service/
+    restart: unless-stopped
