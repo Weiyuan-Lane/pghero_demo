@@ -29,3 +29,9 @@ Viola, your database should be available now on `localhost:8080`
 ```
 docker-compose down
 ```
+
+## source
+
+Thanks to harryho for the [sql sample](https://github.com/harryho/db-samples/blob/master/pgsql/northwind.sql), which I used to demonstrate pghero.
+
+Also [pghero](https://github.com/ankane/pghero) is insane. Definitely check them out too
